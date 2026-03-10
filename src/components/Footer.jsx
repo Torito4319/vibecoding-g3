@@ -7,6 +7,9 @@ export default function Footer() {
           <p className="text-sm text-stone-500 mt-1">
             Hecho con Next.js y mucho cafe.
           </p>
+          <p className="text-sm text-stone-500 mt-2">
+            Tel: <a href="tel:+526141223825" className="hover:text-amber-600 transition-colors">614 122 3825</a>
+          </p>
         </div>
 
         <ul className="flex items-center gap-6">

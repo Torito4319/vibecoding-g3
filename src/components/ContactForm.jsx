@@ -37,8 +37,11 @@ export default function ContactForm() {
           <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
             Contactanos
           </h2>
-          <p className="text-lg text-stone-600">
+          <p className="text-lg text-stone-600 mb-2">
             Envianos un mensaje y te responderemos lo antes posible.
+          </p>
+          <p className="text-lg font-medium text-amber-600">
+            O llámanos al: <a href="tel:+526141223825" className="hover:underline">614 122 3825</a>
           </p>
         </div>
 
