@@ -21,7 +21,7 @@ export default function Header() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-sm text-gray-600 hover:text-sky-500 transition-colors"
+                className="text-sm text-gray-600 hover:text-violet-500 transition-colors"
               >
                 {link.label}
               </a>
@@ -52,7 +52,7 @@ export default function Header() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="block text-sm text-gray-600 hover:text-sky-500 transition-colors"
+                className="block text-sm text-gray-600 hover:text-violet-500 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

@@ -24,20 +24,20 @@ export default function Pricing() {
                 key={index}
                 className={`rounded-2xl p-8 border ${
                   plan.highlighted
-                    ? "border-sky-500 bg-sky-500 text-white shadow-xl scale-105"
+                    ? "border-violet-500 bg-violet-500 text-white shadow-xl scale-105"
                     : "border-gray-200 bg-white"
                 }`}
               >
               <h3
                 className={`text-lg font-semibold mb-1 ${
-                  plan.highlighted ? "text-sky-50" : "text-gray-900"
+                  plan.highlighted ? "text-violet-50" : "text-gray-900"
                 }`}
               >
                 {plan.name}
               </h3>
               <p
                 className={`text-sm mb-6 ${
-                  plan.highlighted ? "text-sky-100" : "text-gray-500"
+                  plan.highlighted ? "text-violet-100" : "text-gray-500"
                 }`}
               >
                 {plan.description}
@@ -46,7 +46,7 @@ export default function Pricing() {
                 <span className="text-4xl font-bold">{plan.price}</span>
                 <span
                   className={`text-sm ${
-                    plan.highlighted ? "text-sky-100" : "text-gray-500"
+                    plan.highlighted ? "text-violet-100" : "text-gray-500"
                   }`}
                 >
                   {plan.period}
@@ -57,7 +57,7 @@ export default function Pricing() {
                   <li key={i} className="flex items-center gap-3 text-sm">
                     <svg
                       className={`w-5 h-5 shrink-0 ${
-                        plan.highlighted ? "text-sky-100" : "text-sky-500"
+                        plan.highlighted ? "text-violet-100" : "text-violet-500"
                       }`}
                       fill="none"
                       viewBox="0 0 24 24"

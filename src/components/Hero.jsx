@@ -6,12 +6,12 @@ export default function Hero() {
   return (
     <section id="hero" className="pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-sky-600 bg-sky-50 rounded-full">
+        <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-violet-600 bg-violet-50 rounded-full">
           {badge}
         </span>
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
           {title}
-          <span className="text-sky-500"> {titleHighlight}</span>
+          <span className="text-violet-500"> {titleHighlight}</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
           {subtitle}
@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href={ctaPrimaryUrl}
-            className="w-full sm:w-auto px-8 py-3.5 bg-black text-white font-medium rounded-full hover:bg-zinc-800 transition-colors text-center"
+            className="w-full sm:w-auto px-8 py-3.5 bg-violet-600 text-white font-medium rounded-full hover:bg-violet-700 transition-colors text-center"
           >
             {ctaPrimary}
           </a>

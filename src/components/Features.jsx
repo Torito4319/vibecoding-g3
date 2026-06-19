@@ -38,7 +38,7 @@ export default function Features() {
               key={index}
               className="bg-white p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow"
             >
-              <div className="w-12 h-12 bg-sky-50 text-sky-500 rounded-xl flex items-center justify-center mb-5">
+              <div className="w-12 h-12 bg-violet-50 text-violet-500 rounded-xl flex items-center justify-center mb-5">
                 {iconMap[feature.icon] ?? iconMap.settings}
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">

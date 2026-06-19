@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { resend } from "@/libs/resend";
+import { getResend } from "@/libs/resend";
 import { addRowToSheet } from "@/libs/google-sheets";
 import { siteConfig } from "@/config/site";
 
@@ -70,7 +70,25 @@ export async function POST(request) {
   // 3. Enviar email de confirmacion al lead
   // Si el email falla, igual devolvemos exito porque el lead ya quedo guardado
   try {
-    await resend.emails.send({
+    // #region agent log
+    fetch("http://127.0.0.1:7635/ingest/7d6d1df9-021e-482f-be84-0e1688659c30", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Debug-Session-Id": "388e48",
+      },
+      body: JSON.stringify({
+        sessionId: "388e48",
+        location: "route.js:POST:before-email",
+        message: "about to send confirmation email",
+        data: { hasResendKey: Boolean(process.env.RESEND_API_KEY) },
+        timestamp: Date.now(),
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
+    // #endregion
+
+    await getResend().emails.send({
       from: process.env.RESEND_FROM_EMAIL || siteConfig.email.from,
       to: email,
       subject: siteConfig.email.subject,
