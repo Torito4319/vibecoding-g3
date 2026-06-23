@@ -19,7 +19,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href={ctaPrimaryUrl}
-            className="w-full sm:w-auto px-8 py-3.5 bg-violet-600 text-white font-medium rounded-full hover:bg-violet-700 transition-colors text-center"
+            className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition-colors text-center"
           >
             {ctaPrimary}
           </a>
