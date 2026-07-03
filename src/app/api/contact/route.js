@@ -3,7 +3,6 @@ import { getResend } from "@/libs/resend";
 import { addRowToSheet } from "@/libs/google-sheets";
 import { siteConfig } from "@/config/site";
 
-// Escapa caracteres especiales de HTML para evitar inyeccion en el email
 function escapeHtml(text) {
   return String(text)
     .replace(/&/g, "&amp;")
@@ -12,13 +11,11 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
-// Valida que el email tenga formato correcto
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export async function POST(request) {
-  // 1. Leer y validar los datos del formulario
   let body;
   try {
     body = await request.json();
@@ -29,77 +26,125 @@ export async function POST(request) {
     );
   }
 
-  const { name, email, phone, message } = body;
+  const { nombre, apellido, correo, telefono, industria, comentarios } = body;
 
-  if (!name?.trim()) {
+  if (!nombre?.trim()) {
     return NextResponse.json(
       { error: "El nombre es requerido." },
       { status: 400 }
     );
   }
-  if (!email?.trim()) {
+  if (!apellido?.trim()) {
     return NextResponse.json(
-      { error: "El email es requerido." },
+      { error: "El apellido es requerido." },
       { status: 400 }
     );
   }
-  if (!isValidEmail(email)) {
+  if (!correo?.trim()) {
     return NextResponse.json(
-      { error: "El email no tiene un formato valido." },
+      { error: "El correo es requerido." },
       { status: 400 }
     );
   }
-  if (!message?.trim()) {
+  if (!isValidEmail(correo)) {
     return NextResponse.json(
-      { error: "El mensaje es requerido." },
+      { error: "El correo no tiene un formato valido." },
+      { status: 400 }
+    );
+  }
+  if (!telefono?.trim()) {
+    return NextResponse.json(
+      { error: "El telefono es requerido." },
+      { status: 400 }
+    );
+  }
+  if (!industria?.trim()) {
+    return NextResponse.json(
+      { error: "La industria es requerida." },
+      { status: 400 }
+    );
+  }
+  if (!comentarios?.trim()) {
+    return NextResponse.json(
+      { error: "Los comentarios son requeridos." },
       { status: 400 }
     );
   }
 
-  // 2. Guardar en Google Sheets
   try {
-    await addRowToSheet({ name, email, phone, message });
+    const sheetResult = await addRowToSheet({ nombre, apellido, correo, telefono, industria, comentarios });
+    // #region agent log
+    fetch("http://127.0.0.1:7934/ingest/bbd9b0e9-28d1-4c97-8f30-ce6baa0c0de5", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "596781" },
+      body: JSON.stringify({
+        sessionId: "596781",
+        location: "route.js:POST:sheets-ok",
+        message: "row saved to google sheets",
+        data: {
+          sheetIdSet: Boolean(process.env.GOOGLE_SHEET_ID),
+          headers: sheetResult.headers,
+          matchedColumns: sheetResult.matchedColumns,
+        },
+        timestamp: Date.now(),
+        hypothesisId: "B",
+        runId: "post-fix",
+      }),
+    }).catch(() => {});
+    // #endregion
   } catch (error) {
+    const status = error.response?.status || error.status;
+    const is403 = status === 403 || String(error.message || "").includes("403");
+    // #region agent log
+    fetch("http://127.0.0.1:7934/ingest/bbd9b0e9-28d1-4c97-8f30-ce6baa0c0de5", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "596781" },
+      body: JSON.stringify({
+        sessionId: "596781",
+        location: "route.js:POST:sheets-error",
+        message: "google sheets save failed",
+        data: {
+          status,
+          is403,
+          errorMessage: error.message,
+          sheetIdSet: Boolean(process.env.GOOGLE_SHEET_ID),
+        },
+        timestamp: Date.now(),
+        hypothesisId: "A",
+        runId: "post-fix",
+      }),
+    }).catch(() => {});
+    // #endregion
     console.error("Error al guardar en Google Sheets:", error);
+    if (is403) {
+      const serviceEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "tu cuenta de servicio";
+      return NextResponse.json(
+        {
+          error: `La hoja de Google no tiene permisos. Abre tu hoja, haz clic en Compartir y agrega este email como Editor: ${serviceEmail}`,
+        },
+        { status: 500 }
+      );
+    }
     return NextResponse.json(
       { error: "No pudimos guardar tu mensaje. Intentalo de nuevo en unos minutos." },
       { status: 500 }
     );
   }
 
-  // 3. Enviar email de confirmacion al lead
-  // Si el email falla, igual devolvemos exito porque el lead ya quedo guardado
   try {
-    // #region agent log
-    fetch("http://127.0.0.1:7635/ingest/7d6d1df9-021e-482f-be84-0e1688659c30", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Debug-Session-Id": "388e48",
-      },
-      body: JSON.stringify({
-        sessionId: "388e48",
-        location: "route.js:POST:before-email",
-        message: "about to send confirmation email",
-        data: { hasResendKey: Boolean(process.env.RESEND_API_KEY) },
-        timestamp: Date.now(),
-        hypothesisId: "A",
-      }),
-    }).catch(() => {});
-    // #endregion
-
     await getResend().emails.send({
       from: process.env.RESEND_FROM_EMAIL || siteConfig.email.from,
-      to: email,
+      to: correo,
       subject: siteConfig.email.subject,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #111;">
-          <h2 style="color: #4f46e5;">Hola ${escapeHtml(name)},</h2>
+          <h2 style="color: #4f46e5;">Hola ${escapeHtml(nombre)},</h2>
           <p>Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.</p>
-          ${phone ? `<p style="color: #666;">Tu telefono: <strong>${escapeHtml(phone)}</strong></p>` : ""}
-          <p style="color: #666; margin-top: 24px;">Tu mensaje:</p>
+          <p style="color: #666;">Telefono: <strong>${escapeHtml(telefono)}</strong></p>
+          <p style="color: #666;">Industria: <strong>${escapeHtml(industria)}</strong></p>
+          <p style="color: #666; margin-top: 24px;">Tus comentarios:</p>
           <blockquote style="border-left: 3px solid #4f46e5; padding-left: 16px; color: #444; margin: 8px 0;">
-            ${escapeHtml(message)}
+            ${escapeHtml(comentarios)}
           </blockquote>
           <p style="color: #999; font-size: 14px; margin-top: 32px;">
             — ${escapeHtml(siteConfig.email.teamSignature)}
@@ -108,7 +153,6 @@ export async function POST(request) {
       `,
     });
   } catch (error) {
-    // El lead quedo guardado aunque el email falle; solo lo registramos
     console.error("Error al enviar email de confirmacion:", error);
   }
 

@@ -160,12 +160,22 @@ export const siteConfig = {
     schedulingUrl: "",
     schedulingCta: "Agendar una llamada",
     form: {
-      namePlaceholder: "Tu nombre",
-      emailPlaceholder: "tu@email.com",
-      // Telefono es opcional. Cambia phoneRequired a true si quieres hacerlo obligatorio.
-      phonePlaceholder: "Tu numero de telefono (opcional)",
-      phoneRequired: false,
-      messagePlaceholder: "Escribe tu mensaje aqui...",
+      labels: {
+        nombre: "Nombre",
+        apellido: "Apellido",
+        correo: "Correo",
+        telefono: "Telefono",
+        industria: "Industria",
+        comentarios: "Comentarios",
+      },
+      placeholders: {
+        nombre: "Tu nombre",
+        apellido: "Tu apellido",
+        correo: "tu@email.com",
+        telefono: "Tu numero de telefono",
+        industria: "Ej: Tecnologia, Salud, Retail...",
+        comentarios: "Escribe tus comentarios aqui...",
+      },
       submitButton: "Enviar mensaje",
       sendingButton: "Enviando...",
       successMessage:

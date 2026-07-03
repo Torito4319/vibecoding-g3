@@ -7,18 +7,27 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+const INITIAL_FORM = {
+  nombre: "",
+  apellido: "",
+  correo: "",
+  telefono: "",
+  industria: "",
+  comentarios: "",
+};
+
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [serverError, setServerError] = useState("");
 
   const { heading, subheading, form: formConfig, schedulingUrl, schedulingCta } = siteConfig.contact;
+  const { labels, placeholders } = formConfig;
 
   function handleChange(e) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Limpia el error del campo cuando el usuario empieza a corregirlo
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -26,19 +35,25 @@ export default function ContactForm() {
 
   function validate() {
     const newErrors = {};
-    if (!form.name.trim()) {
-      newErrors.name = "Por favor escribe tu nombre.";
+    if (!form.nombre.trim()) {
+      newErrors.nombre = "Por favor escribe tu nombre.";
     }
-    if (!form.email.trim()) {
-      newErrors.email = "Por favor escribe tu email.";
-    } else if (!isValidEmail(form.email)) {
-      newErrors.email = "Ese email no parece valido. Ejemplo: nombre@correo.com";
+    if (!form.apellido.trim()) {
+      newErrors.apellido = "Por favor escribe tu apellido.";
     }
-    if (formConfig.phoneRequired && !form.phone.trim()) {
-      newErrors.phone = "Por favor escribe tu telefono.";
+    if (!form.correo.trim()) {
+      newErrors.correo = "Por favor escribe tu correo.";
+    } else if (!isValidEmail(form.correo)) {
+      newErrors.correo = "Ese correo no parece valido. Ejemplo: nombre@correo.com";
     }
-    if (!form.message.trim()) {
-      newErrors.message = "Por favor escribe tu mensaje.";
+    if (!form.telefono.trim()) {
+      newErrors.telefono = "Por favor escribe tu telefono.";
+    }
+    if (!form.industria.trim()) {
+      newErrors.industria = "Por favor indica tu industria.";
+    }
+    if (!form.comentarios.trim()) {
+      newErrors.comentarios = "Por favor escribe tus comentarios.";
     }
     return newErrors;
   }
@@ -71,13 +86,18 @@ export default function ContactForm() {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", phone: "", message: "" });
+      setForm(INITIAL_FORM);
       setErrors({});
     } catch {
       setServerError(formConfig.errorMessage);
       setStatus("error");
     }
   }
+
+  const inputClass = (field) =>
+    `w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition ${
+      errors[field] ? "border-red-400 bg-red-50" : "border-gray-300"
+    }`;
 
   return (
     <section id="contact" className="py-20 px-6">
@@ -106,90 +126,113 @@ export default function ContactForm() {
           noValidate
           className="bg-white border border-gray-200 rounded-2xl p-8 space-y-6"
         >
-          {/* Nombre */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Nombre
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={form.name}
-              onChange={handleChange}
-              placeholder={formConfig.namePlaceholder}
-              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition ${
-                errors.name ? "border-red-400 bg-red-50" : "border-gray-300"
-              }`}
-            />
-            {errors.name && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.name}</p>
-            )}
-          </div>
-
-          {/* Email */}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder={formConfig.emailPlaceholder}
-              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition ${
-                errors.email ? "border-red-400 bg-red-50" : "border-gray-300"
-              }`}
-            />
-            {errors.email && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.email}</p>
-            )}
-          </div>
-
-          {/* Telefono */}
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-              Telefono
-              {!formConfig.phoneRequired && (
-                <span className="ml-1.5 text-gray-400 font-normal">(opcional)</span>
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-2">
+                {labels.nombre}
+              </label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                value={form.nombre}
+                onChange={handleChange}
+                placeholder={placeholders.nombre}
+                className={inputClass("nombre")}
+              />
+              {errors.nombre && (
+                <p className="mt-1.5 text-sm text-red-600">{errors.nombre}</p>
               )}
+            </div>
+
+            <div>
+              <label htmlFor="apellido" className="block text-sm font-medium text-gray-700 mb-2">
+                {labels.apellido}
+              </label>
+              <input
+                id="apellido"
+                name="apellido"
+                type="text"
+                value={form.apellido}
+                onChange={handleChange}
+                placeholder={placeholders.apellido}
+                className={inputClass("apellido")}
+              />
+              {errors.apellido && (
+                <p className="mt-1.5 text-sm text-red-600">{errors.apellido}</p>
+              )}
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="correo" className="block text-sm font-medium text-gray-700 mb-2">
+              {labels.correo}
             </label>
             <input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={form.phone}
+              id="correo"
+              name="correo"
+              type="email"
+              value={form.correo}
               onChange={handleChange}
-              placeholder={formConfig.phonePlaceholder}
-              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition ${
-                errors.phone ? "border-red-400 bg-red-50" : "border-gray-300"
-              }`}
+              placeholder={placeholders.correo}
+              className={inputClass("correo")}
             />
-            {errors.phone && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.phone}</p>
+            {errors.correo && (
+              <p className="mt-1.5 text-sm text-red-600">{errors.correo}</p>
             )}
           </div>
 
-          {/* Mensaje */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-              Mensaje
+            <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-2">
+              {labels.telefono}
+            </label>
+            <input
+              id="telefono"
+              name="telefono"
+              type="tel"
+              value={form.telefono}
+              onChange={handleChange}
+              placeholder={placeholders.telefono}
+              className={inputClass("telefono")}
+            />
+            {errors.telefono && (
+              <p className="mt-1.5 text-sm text-red-600">{errors.telefono}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="industria" className="block text-sm font-medium text-gray-700 mb-2">
+              {labels.industria}
+            </label>
+            <input
+              id="industria"
+              name="industria"
+              type="text"
+              value={form.industria}
+              onChange={handleChange}
+              placeholder={placeholders.industria}
+              className={inputClass("industria")}
+            />
+            {errors.industria && (
+              <p className="mt-1.5 text-sm text-red-600">{errors.industria}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="comentarios" className="block text-sm font-medium text-gray-700 mb-2">
+              {labels.comentarios}
             </label>
             <textarea
-              id="message"
-              name="message"
+              id="comentarios"
+              name="comentarios"
               rows={4}
-              value={form.message}
+              value={form.comentarios}
               onChange={handleChange}
-              placeholder={formConfig.messagePlaceholder}
-              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition resize-none ${
-                errors.message ? "border-red-400 bg-red-50" : "border-gray-300"
-              }`}
+              placeholder={placeholders.comentarios}
+              className={`${inputClass("comentarios")} resize-none`}
             />
-            {errors.message && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.message}</p>
+            {errors.comentarios && (
+              <p className="mt-1.5 text-sm text-red-600">{errors.comentarios}</p>
             )}
           </div>
 

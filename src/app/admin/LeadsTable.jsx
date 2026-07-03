@@ -91,7 +91,7 @@ export default function LeadsTable({ leads, error }) {
                 </svg>
                 <input
                   type="text"
-                  placeholder="Buscar por nombre, email o mensaje..."
+                  placeholder="Buscar por nombre, correo o comentarios..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="pl-9 pr-4 py-2.5 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-72"
@@ -130,13 +130,19 @@ export default function LeadsTable({ leads, error }) {
                           Nombre
                         </th>
                         <th className="text-left px-5 py-3.5 font-medium text-gray-600">
+                          Apellido
+                        </th>
+                        <th className="text-left px-5 py-3.5 font-medium text-gray-600">
                           Email
                         </th>
                         <th className="text-left px-5 py-3.5 font-medium text-gray-600">
                           Telefono
                         </th>
                         <th className="text-left px-5 py-3.5 font-medium text-gray-600">
-                          Mensaje
+                          Industria
+                        </th>
+                        <th className="text-left px-5 py-3.5 font-medium text-gray-600">
+                          Comentarios
                         </th>
                       </tr>
                     </thead>
@@ -152,6 +158,11 @@ export default function LeadsTable({ leads, error }) {
                           <td className="px-5 py-4 font-medium text-gray-900">
                             {lead.nombre}
                           </td>
+                          <td className="px-5 py-4 text-gray-600">
+                            {lead.apellido || (
+                              <span className="text-gray-300">—</span>
+                            )}
+                          </td>
                           <td className="px-5 py-4">
                             <a
                               href={`mailto:${lead.email}`}
@@ -166,11 +177,16 @@ export default function LeadsTable({ leads, error }) {
                             )}
                           </td>
                           <td className="px-5 py-4 text-gray-600">
+                            {lead.industria || (
+                              <span className="text-gray-300">—</span>
+                            )}
+                          </td>
+                          <td className="px-5 py-4 text-gray-600">
                             <span
                               className="block max-w-xs truncate"
-                              title={lead.mensaje}
+                              title={lead.comentarios}
                             >
-                              {lead.mensaje}
+                              {lead.comentarios}
                             </span>
                           </td>
                         </tr>
