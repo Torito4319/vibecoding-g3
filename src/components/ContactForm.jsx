@@ -96,7 +96,7 @@ export default function ContactForm() {
 
   const inputClass = (field) =>
     `w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-transparent transition ${
-      errors[field] ? "border-red-400 bg-red-50" : "border-gray-300"
+      errors[field] ? "border-rose-200 bg-rose-50/70" : "border-gray-300"
     }`;
 
   return (
@@ -141,7 +141,7 @@ export default function ContactForm() {
                 className={inputClass("nombre")}
               />
               {errors.nombre && (
-                <p className="mt-1.5 text-sm text-red-600">{errors.nombre}</p>
+                <p className="mt-1.5 text-sm text-rose-500">{errors.nombre}</p>
               )}
             </div>
 
@@ -159,7 +159,7 @@ export default function ContactForm() {
                 className={inputClass("apellido")}
               />
               {errors.apellido && (
-                <p className="mt-1.5 text-sm text-red-600">{errors.apellido}</p>
+                <p className="mt-1.5 text-sm text-rose-500">{errors.apellido}</p>
               )}
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function ContactForm() {
               className={inputClass("correo")}
             />
             {errors.correo && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.correo}</p>
+              <p className="mt-1.5 text-sm text-rose-500">{errors.correo}</p>
             )}
           </div>
 
@@ -196,7 +196,7 @@ export default function ContactForm() {
               className={inputClass("telefono")}
             />
             {errors.telefono && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.telefono}</p>
+              <p className="mt-1.5 text-sm text-rose-500">{errors.telefono}</p>
             )}
           </div>
 
@@ -214,7 +214,7 @@ export default function ContactForm() {
               className={inputClass("industria")}
             />
             {errors.industria && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.industria}</p>
+              <p className="mt-1.5 text-sm text-rose-500">{errors.industria}</p>
             )}
           </div>
 
@@ -232,7 +232,7 @@ export default function ContactForm() {
               className={`${inputClass("comentarios")} resize-none`}
             />
             {errors.comentarios && (
-              <p className="mt-1.5 text-sm text-red-600">{errors.comentarios}</p>
+              <p className="mt-1.5 text-sm text-rose-500">{errors.comentarios}</p>
             )}
           </div>
 
@@ -250,7 +250,7 @@ export default function ContactForm() {
             </p>
           )}
           {status === "error" && (
-            <p className="text-center text-red-600 font-medium">
+            <p className="text-center text-rose-500 font-medium">
               {serverError || formConfig.errorMessage}
             </p>
           )}

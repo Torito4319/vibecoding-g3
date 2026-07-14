@@ -10,25 +10,22 @@ export const siteConfig = {
   // ─────────────────────────────────────────────
   // INFORMACION DEL NEGOCIO
   // ─────────────────────────────────────────────
-  name: "VibeCoding",
-  tagline: "La plantilla perfecta para lanzar tu idea al mundo.",
+  name: "Control Satelital Integral",
+  tagline: "Control total de tu operacion, en tiempo real y desde una sola plataforma.",
   description:
-    "Rapido, moderno y listo para personalizar a tu gusto.",
+    "GPS satelital, videovigilancia remota, localizacion ferroviaria y radiocomunicacion encriptada para empresas y gobierno.",
 
   // ─────────────────────────────────────────────
   // SECCION HERO (la primera pantalla que ven los visitantes)
   // ─────────────────────────────────────────────
   hero: {
-    badge: "Bienvenido a tu nuevo proyecto",
-    title: "Construye algo",
-    titleHighlight: "increible",
+    badge: "Soluciones para operaciones criticas",
+    title: "Control total de tu operacion,",
+    titleHighlight: "en tiempo real",
     subtitle:
-      "La plantilla perfecta para lanzar tu idea al mundo. Rapido, moderno y listo para personalizar a tu gusto.",
-    ctaPrimary: "Empezar ahora",
-    ctaSecondary: "Ver mas",
-    // Enlace del boton principal. Puedes poner una URL de Calendly o Google Calendar.
-    // Ejemplo Calendly: "https://calendly.com/tu-usuario/30min"
-    // Ejemplo Google Calendar: "https://calendar.google.com/calendar/appointments/..."
+      "GPS satelital, videovigilancia remota, localizacion ferroviaria y radiocomunicacion encriptada integradas para empresas y gobiernos que no pueden perder visibilidad ni seguridad en campo.",
+    ctaPrimary: "Solicitar demostracion",
+    ctaSecondary: "Ver soluciones",
     ctaPrimaryUrl: "#contacto",
     ctaSecondaryUrl: "#features",
   },
@@ -37,26 +34,27 @@ export const siteConfig = {
   // BENEFICIOS / FEATURES (seccion de caracteristicas)
   // ─────────────────────────────────────────────
   features: {
-    heading: "Todo lo que necesitas para lanzar",
-    subheading: "Caracteristicas disenadas para ayudarte a crecer.",
+    heading: "Soluciones para cada operacion critica",
+    subheading:
+      "Tecnologia satelital y comunicacion segura adaptada a ferrocarriles, centros de comando y equipos en campo.",
     items: [
       {
         icon: "lightning",
-        title: "Rapido y eficiente",
+        title: "Ferromex y operadores ferroviarios",
         description:
-          "Optimizado para velocidad. Tu sitio cargara en un instante y tus usuarios lo amaran.",
-      },
-      {
-        icon: "mobile",
-        title: "Diseno responsive",
-        description:
-          "Se ve perfecto en cualquier dispositivo: celular, tablet o computadora.",
+          "Donde esta cada vagon ahora mismo? Monitorea tu flota ferroviaria en tiempo real por satelite, con una plataforma personalizada que te da control operativo sin depender de reportes manuales.",
       },
       {
         icon: "settings",
-        title: "Facil de personalizar",
+        title: "C4, C5 y centros de comando",
         description:
-          "Cambia colores, textos e imagenes facilmente desde un solo archivo de configuracion.",
+          "Comunicacion critica, sin comprometer la seguridad. Integra radiocomunicacion con la mas alta encriptacion y pasa por consola sin perder proteccion. Menos riesgo. Mas confianza en cada enlace.",
+      },
+      {
+        icon: "mobile",
+        title: "Municipios y equipos en campo",
+        description:
+          "Sabe donde esta tu gente cuando mas lo necesitas. Ubica en tiempo real a tu personal en campana u operacion de campo. Mejor coordinacion, respuesta mas rapida y decisiones con datos, no suposiciones.",
       },
     ],
   },
@@ -65,49 +63,50 @@ export const siteConfig = {
   // PRECIOS (planes de pago)
   // ─────────────────────────────────────────────
   pricing: {
-    heading: "Precios simples y transparentes",
+    heading: "Soluciones a la medida de tu operacion",
     subheading:
-      "Elige el plan que mejor se adapte a tus necesidades. Sin costos ocultos.",
+      "Cada cliente tiene necesidades distintas. Cotizamos segun tu sector, escala y nivel de integracion.",
     plans: [
       {
-        name: "Basico",
-        price: "$0",
-        period: "/mes",
-        description: "Perfecto para empezar",
+        name: "Ferroviario",
+        price: "Cotizar",
+        period: "",
+        description: "Control de vagones y flota ferroviaria",
         features: [
-          "1 proyecto",
-          "Soporte por email",
-          "Actualizaciones basicas",
+          "Localizacion satelital en tiempo real",
+          "Plataforma personalizada",
+          "Monitoreo de vagones y rutas",
+          "Reportes operativos automaticos",
         ],
-        cta: "Empezar gratis",
+        cta: "Solicitar cotizacion",
         highlighted: false,
       },
       {
-        name: "Pro",
-        price: "$29",
-        period: "/mes",
-        description: "Para crecer tu negocio",
+        name: "Seguridad C4/C5",
+        price: "Cotizar",
+        period: "",
+        description: "Comunicacion encriptada para centros de comando",
         features: [
-          "Proyectos ilimitados",
-          "Soporte prioritario",
-          "Todas las funcionalidades",
-          "Analiticas avanzadas",
+          "Radiocomunicacion de alta encriptacion",
+          "Integracion con consola sin perder proteccion",
+          "Videovigilancia remota",
+          "Soporte tecnico especializado",
         ],
-        cta: "Empezar ahora",
+        cta: "Hablar con un especialista",
         highlighted: true,
       },
       {
-        name: "Enterprise",
-        price: "$99",
-        period: "/mes",
-        description: "Para equipos grandes",
+        name: "Gobierno",
+        price: "Cotizar",
+        period: "",
+        description: "Ubicacion de equipos en campo para municipios",
         features: [
-          "Todo lo de Pro",
-          "Soporte dedicado 24/7",
-          "Integraciones custom",
-          "SLA garantizado",
+          "GPS satelital para personal en campana",
+          "Seguimiento en tiempo real",
+          "Coordinacion de equipos en territorio",
+          "Implementacion y capacitacion",
         ],
-        cta: "Contactar ventas",
+        cta: "Agendar demostracion",
         highlighted: false,
       },
     ],
@@ -118,32 +117,32 @@ export const siteConfig = {
   // ─────────────────────────────────────────────
   faq: {
     heading: "Preguntas frecuentes",
-    subheading: "Resolvemos tus dudas mas comunes.",
+    subheading: "Resolvemos tus dudas sobre nuestras soluciones.",
     items: [
       {
-        question: "Como puedo empezar a usar la plantilla?",
+        question: "Que sectores atienden?",
         answer:
-          "Solo necesitas clonar el repositorio, instalar las dependencias con npm install y ejecutar npm run dev para verla en tu computadora.",
+          "Trabajamos con operadores ferroviarios como Ferromex, centros de comando C4 y C5, y municipios que necesitan ubicar equipos en campo durante campanas u operaciones.",
       },
       {
-        question: "Necesito saber programar?",
+        question: "Como funciona la localizacion de trenes en tiempo real?",
         answer:
-          "No necesariamente. Puedes personalizar textos, colores e imagenes sin tocar codigo complejo. Solo edita el archivo src/config/site.js.",
+          "Utilizamos GPS satelital conectado a una plataforma personalizada donde puedes ver la ubicacion de cada vagon en tiempo real, sin depender de reportes manuales.",
       },
       {
-        question: "Puedo usar mi propio dominio?",
+        question: "La radiocomunicacion mantiene la encriptacion al pasar por consola?",
         answer:
-          "Si. Una vez que despliegues tu sitio en Vercel o cualquier otro hosting, puedes conectar tu dominio personalizado facilmente.",
+          "Si. Nuestras soluciones integran radiocomunicacion con la mas alta encriptacion, permitiendo pasar por consola sin perder la proteccion de las comunicaciones.",
       },
       {
-        question: "Que metodos de pago aceptan?",
+        question: "Pueden integrar videovigilancia remota?",
         answer:
-          "Aceptamos tarjetas de credito y debito a traves de nuestra plataforma de pago segura.",
+          "Si. Ofrecemos soluciones de videovigilancia remota que se integran con GPS satelital y comunicacion en una sola plataforma de control.",
       },
       {
-        question: "Ofrecen soporte tecnico?",
+        question: "Como solicito una demostracion?",
         answer:
-          "Si. Todos los planes incluyen soporte por email. Los planes Pro y Enterprise tienen soporte prioritario.",
+          "Llena el formulario de contacto indicando tu sector e industria. Un especialista te contactara para agendar una demostracion personalizada.",
       },
     ],
   },
@@ -152,9 +151,9 @@ export const siteConfig = {
   // SECCION DE CONTACTO
   // ─────────────────────────────────────────────
   contact: {
-    heading: "Contactanos",
+    heading: "Habla con un especialista",
     subheading:
-      "Envianos un mensaje y te responderemos lo antes posible.",
+      "Cuentanos tu operacion y te mostramos como se ve el control total en tu sector.",
     // URL para agendar una cita (Calendly o Google Calendar)
     // Si no tienes, deja el valor vacio: ""
     schedulingUrl: "",
@@ -173,10 +172,10 @@ export const siteConfig = {
         apellido: "Tu apellido",
         correo: "tu@email.com",
         telefono: "Tu numero de telefono",
-        industria: "Ej: Tecnologia, Salud, Retail...",
-        comentarios: "Escribe tus comentarios aqui...",
+        industria: "Ej: Ferroviario, Seguridad C4/C5, Gobierno...",
+        comentarios: "Cuentanos sobre tu operacion y que necesitas controlar...",
       },
-      submitButton: "Enviar mensaje",
+      submitButton: "Solicitar demostracion",
       sendingButton: "Enviando...",
       successMessage:
         "Mensaje enviado correctamente. Revisa tu email.",
@@ -184,7 +183,7 @@ export const siteConfig = {
         "Hubo un error al enviar. Intentalo de nuevo.",
     },
     // Datos de contacto opcionales para mostrar en el footer o sidebar
-    email: "hola@vibecoding.com",
+    email: "contacto@tudominio.com",
     phone: "",
     address: "",
   },
@@ -195,8 +194,8 @@ export const siteConfig = {
   nav: {
     links: [
       { label: "Inicio", href: "#inicio" },
-      { label: "Features", href: "#features" },
-      { label: "Precios", href: "#precios" },
+      { label: "Soluciones", href: "#features" },
+      { label: "Sectores", href: "#precios" },
       { label: "FAQ", href: "#faq" },
       { label: "Contacto", href: "#contacto" },
     ],
@@ -206,11 +205,11 @@ export const siteConfig = {
   // FOOTER
   // ─────────────────────────────────────────────
   footer: {
-    tagline: "Hecho con Next.js y mucho cafe.",
+    tagline: "Control satelital, videovigilancia y comunicacion segura para operaciones criticas.",
     links: [
       { label: "Inicio", href: "#inicio" },
-      { label: "Features", href: "#features" },
-      { label: "Precios", href: "#precios" },
+      { label: "Soluciones", href: "#features" },
+      { label: "Sectores", href: "#precios" },
       { label: "Contacto", href: "#contacto" },
     ],
     copyright: "Todos los derechos reservados.",
@@ -220,8 +219,8 @@ export const siteConfig = {
   // EMAIL (notificaciones automaticas al recibir un contacto)
   // ─────────────────────────────────────────────
   email: {
-    subject: "Recibimos tu mensaje",
-    teamSignature: "El equipo de VibeCoding",
+    subject: "Recibimos tu solicitud de demostracion",
+    teamSignature: "El equipo de Control Satelital Integral",
     // El remitente del email. Debe coincidir con tu dominio verificado en Resend.
     from: "onboarding@resend.dev",
   },
@@ -259,8 +258,8 @@ export const siteConfig = {
   // METADATOS SEO (lo que aparece en Google y redes sociales)
   // ─────────────────────────────────────────────
   metadata: {
-    title: "VibeCoding - Tu plantilla para lanzar rapido",
+    title: "Control Satelital Integral - GPS, Videovigilancia y Comunicacion Segura",
     description:
-      "La plantilla perfecta para lanzar tu idea al mundo. Rapido, moderno y listo para personalizar.",
+      "Soluciones integrales de GPS satelital, videovigilancia remota, localizacion ferroviaria y radiocomunicacion encriptada para empresas y gobierno.",
   },
 };
